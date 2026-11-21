@@ -219,21 +219,25 @@ The C# conventions are:
 - No project under `src` references Npgsql, Dapper, a database provider or a migration tool.
 - No `MethodInfo.Invoke`/`DynamicInvoke`/`Activator.CreateInstance` in dispatch IL.
 - No `async void` in production assemblies (IL/metadata scan).
-- Public API snapshot (`PublicApiGenerator` or `Microsoft.CodeAnalysis.PublicApiAnalyzers`).
+- Public API snapshot: `Microsoft.CodeAnalysis.PublicApiAnalyzers` with `PublicAPI.Shipped.txt` and
+  `PublicAPI.Unshipped.txt` in every packable library. An undeclared public symbol is `RS0016` and fails the build, so a
+  public API change always carries an intentional snapshot update.
 
 ## CI gates
 
 Every pull request runs:
 
 1. `dotnet restore Trivium.slnx`
-2. `dotnet build -c Release` (warnings as errors)
-3. `dotnet format --verify-no-changes`
-4. `dotnet test` unit + generators + analyzers
-5. Integration tests (Aspire AppHost, Linux)
-6. Trim analysis (`PublishTrimmed` sample build)
-7. Package build + public API snapshot check
-8. Docs build + link check + markdown lint
-9. CodeQL + dependency review + secret scanning
+2. `dotnet format Trivium.slnx --verify-no-changes`
+3. `dotnet build -c Release` (warnings as errors; includes the public API snapshot analyzer)
+4. ReSharper inspections (`jb inspectcode`, no issues above `HINT`)
+5. `dotnet test` unit + generators + analyzers
+6. `dotnet pack` into `artifacts/` (README, icon, XML docs, symbols)
+7. Docs build + link check + markdown lint (`.github/workflows/docs.yml`)
+8. CodeQL (`.github/workflows/codeql.yml`), dependency review on pull requests
+   (`.github/workflows/dependency-review.yml`), secret scanning
+9. Integration tests (Aspire AppHost, Linux) — from M6, when the AppHost and containers exist
+10. Trim analysis (`PublishTrimmed` sample build) — once a host sample exists (M3 onwards)
 
 Release tags additionally run:
 

@@ -39,7 +39,7 @@ multi-bot hosting stay explicit.
 
 ## Status
 
-::: info In development · M0
+::: info In development · M1
 The design is settled and the implementation is underway. There is no public release yet; the
 [roadmap](https://github.com/VodemSharp/trivium/blob/main/docs/plan/roadmap.md) tracks each milestone.
 :::
