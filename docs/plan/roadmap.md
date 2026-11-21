@@ -95,70 +95,75 @@ everything user-visible. M10 is the freeze.
 
 **Depends on:** nothing. **Scope size:** S.
 
+**Status:** complete (2026-11-21). Deferred by design, not by omission: NuGet lock files until the dependency graph
+stabilizes, coverage collection until the kernel has behavior worth measuring (after M1), Aspire-backed integration
+tests until the sample infrastructure exists in M6, and the DocFX API reference until M9.
+
 **Non-goals:** no routing, no bot API code, no data layer.
 
 ### Workstreams
 
 #### 0.1 Repository and build
 
-- [ ] Create the solution structure from the [repository layout](../README.md#Repository%20layout): all package
+- [x] Create the solution structure from the [repository layout](../README.md#Repository%20layout): all package
       projects, app projects, test projects, samples.
-- [ ] `Trivium.slnx` with solution folders; no `.sln`.
-- [ ] `global.json`: .NET SDK `10.0.4xx`, `rollForward: latestFeature`,
+- [x] `Trivium.slnx` with solution folders; no `.sln`.
+- [x] `global.json`: .NET SDK `10.0.4xx`, `rollForward: latestFeature`,
       `"test": { "runner": "Microsoft.Testing.Platform" }`.
-- [ ] `Directory.Build.props`:
+- [x] `Directory.Build.props`:
   - `TargetFramework=net10.0`, `LangVersion=latest`, `Nullable=enable`, `ImplicitUsings=enable`.
   - `TreatWarningsAsErrors=true`, `EnforceCodeStyleInBuild=true`, `AnalysisMode=Recommended`.
   - `GenerateDocumentationFile=true`, `NoWarn` only for justified library-wide cases.
   - `IsAotCompatible=true` on libraries; `IsTrimmable=true`; `EnableTrimAnalyzer=true`.
   - `ContinuousIntegrationBuild`, `Deterministic`, `EmbedUntrackedSources`, SourceLink.
-- [ ] `Directory.Build.targets` (in-house analyzers/generator wiring) and `Directory.Packages.props` with central
+- [x] `Directory.Build.targets` (in-house analyzers/generator wiring) and `Directory.Packages.props` with central
       package management and pinned versions:
       `Telegram.Bot 22.10.3.3`, `Microsoft.Extensions.* 10.0.x`, `Aspire.Hosting.*`, `xunit.v3`, Roslyn, Roslynator,
       AsyncFixer, VSTHRD, BannedApi. Database packages (`Npgsql`, `Dapper`, `Dapper.AOT`, `DbUp.PostgreSQL`,
       `StackExchange.Redis`) are pinned centrally and referenced only by samples.
-- [ ] `.editorconfig` with the house conventions: `ct` naming, block bodies, line length 120, file-scoped namespaces,
+- [x] `.editorconfig` with the house conventions: `ct` naming, block bodies, line length 120, file-scoped namespaces,
       one type per file, no implicit `var` where unclear, LF endings.
-- [ ] `BannedSymbols.txt`: `DateTime.Now/Today/UtcNow`, `DateTimeOffset.Now/UtcNow`, `Task.Wait*`, `Task.Result`,
+- [x] `BannedSymbols.txt`: `DateTime.Now/Today/UtcNow`, `DateTimeOffset.Now/UtcNow`, `Task.Wait*`, `Task.Result`,
       `ValueTask.Result`, `Thread.Sleep`, `new HttpClient()`, `Newtonsoft.Json` entry points, `async void` is handled by
       analyzers/diagnostics.
-- [ ] `.config/dotnet-tools.json` for local tools (ReSharper CLI, etc.); `dotnet tool restore` in CI.
-- [ ] `NuGet.config`, `.gitignore`, `.gitattributes`, `LICENSE` (MIT), `README.md`, `SECURITY.md`,
+- [x] `.config/dotnet-tools.json` for local tools (ReSharper CLI, etc.); `dotnet tool restore` in CI.
+- [x] `NuGet.config`, `.gitignore`, `.gitattributes`, `LICENSE` (MIT), `README.md`, `SECURITY.md`,
       `CONTRIBUTING.md`, issue/PR templates.
-- [ ] Versioning: fixed `1.0.0-dev` during development; the release tag `v1.0.0` produces `1.0.0`. No hand-edited release versions.
-- [ ] Package metadata: `PackageId`, `Description`, `RepositoryUrl`, `PackageLicenseExpression=MIT`,
+- [x] Versioning: fixed `1.0.0-dev` during development; the release tag `v1.0.0` produces `1.0.0`. No hand-edited release versions.
+- [x] Package metadata: `PackageId`, `Description`, `RepositoryUrl`, `PackageLicenseExpression=MIT`,
       `PackageReadmeFile`, `PackageIcon`, `IncludeSymbols`, `SymbolPackageFormat=snupkg`, `PackageTags`.
 
 #### 0.2 Quality tooling
 
-- [ ] Analyzer packages referenced once in `Directory.Build.props`: Roslynator, AsyncFixer, VSTHRD,
+- [x] Analyzer packages referenced once in `Directory.Build.props`: Roslynator, AsyncFixer, VSTHRD,
       `Microsoft.CodeAnalysis.BannedApiAnalyzers`.
-- [ ] In-house `Trivium.Generators/Analyzers` project applied via `Directory.Build.targets`; diagnostic IDs reserved
+- [x] In-house `Trivium.Generators/Analyzers` project applied via `Directory.Build.targets`; diagnostic IDs reserved
       `TRIVIUM0001+`.
-- [ ] Test projects: `xunit.v3` only (no VSTest, no `coverlet.collector`); `Microsoft.Testing.Platform` runner.
-- [ ] `dotnet format` and `jb inspectcode` configuration baselined; no ReSharper noise.
-- [ ] Coverage collection via Microsoft.Testing.Platform extensions (not Coverlet); line and branch reports.
+- [x] Test projects: `xunit.v3` only (no VSTest, no `coverlet.collector`); `Microsoft.Testing.Platform` runner.
+- [x] `dotnet format` and `jb inspectcode` configuration baselined; no ReSharper noise.
+- [ ] Coverage collection via Microsoft.Testing.Platform extensions (not Coverlet); line and branch reports —
+      deferred until the kernel has behavior worth measuring (after M1).
 
 #### 0.3 CI
 
-- [ ] GitHub Actions workflow `ci.yml`:
-  - restore (NuGet lock files are introduced when the dependency graph stabilizes);
+- [x] GitHub Actions workflow `ci.yml`:
+  - restore (NuGet lock files arrive when the dependency graph stabilizes);
   - build `-c Release`;
   - `dotnet format --verify-no-changes`;
   - unit + generator + analyzer tests;
-  - integration tests (Aspire AppHost, Linux);
+  - integration tests (Aspire AppHost, Linux) — deferred to M6, when the AppHost and containers exist;
   - `dotnet pack` all packages;
   - public API snapshot validation.
-- [ ] CodeQL, dependency review, secret scanning.
-- [ ] Docs link checker and markdown lint.
+- [x] CodeQL, dependency review, secret scanning.
+- [x] Docs link checker and markdown lint.
 
 #### 0.4 Docs skeleton
 
-- [ ] `docs/README.md`, `docs/fundamental/`, `docs/reference/`, `docs/plan/`.
-- [ ] Doc site scaffold: VitePress for guides; DocFX API reference is scaffolded in M9.
-- [ ] ADR-0001 (Trivium is a framework, not a bot API wrapper) is captured by the
+- [x] `docs/README.md`, `docs/fundamental/`, `docs/reference/`, `docs/plan/`.
+- [x] Doc site scaffold: VitePress for guides; DocFX API reference is scaffolded in M9.
+- [x] ADR-0001 (Trivium is a framework, not a bot API wrapper) is captured by the
       [architecture goals and non-goals](../fundamental/architecture.md#Goals); no separate ADR file.
-- [ ] Capture the working agreement in `AGENTS.md` (git approval-gated; no commits without explicit approval).
+- [x] Capture the working agreement in `AGENTS.md` (git approval-gated; no commits without explicit approval).
 
 ### Deliverables
 
@@ -169,11 +174,11 @@ everything user-visible. M10 is the freeze.
 
 ### Exit criteria
 
-- [ ] `dotnet build Trivium.slnx -c Release` → 0 warnings, 0 errors.
-- [ ] `dotnet test Trivium.slnx` runs the (empty) suites successfully.
-- [ ] `dotnet pack` produces every intended package with README, icon, XML docs and symbols.
-- [ ] CI is green on a clean clone, including format, analyzers and docs.
-- [ ] `dotnet new` template placeholder exists and builds (content can be minimal).
+- [x] `dotnet build Trivium.slnx -c Release` → 0 warnings, 0 errors.
+- [x] `dotnet test Trivium.slnx` runs the (empty) suites successfully.
+- [x] `dotnet pack` produces every intended package with README, icon, XML docs and symbols.
+- [x] CI is green on a clean clone, including format, analyzers and docs.
+- [x] `dotnet new` template placeholder exists and builds (content can be minimal).
 
 ### Risks / watchouts
 

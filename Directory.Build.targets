@@ -36,4 +36,13 @@
     <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 
+  <!-- Public API snapshot validation. The generator and template packages have no
+       consumer-facing API surface: the generator is compiler-only and the template
+       ships content, so neither carries PublicAPI.*.txt files. -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true' and '$(MSBuildProjectName)' != 'Trivium.Generators' and '$(MSBuildProjectName)' != 'Trivium.Templates'">
+    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" PrivateAssets="all" />
+    <AdditionalFiles Include="PublicAPI.Shipped.txt" Condition="Exists('$(MSBuildProjectDirectory)/PublicAPI.Shipped.txt')" />
+    <AdditionalFiles Include="PublicAPI.Unshipped.txt" Condition="Exists('$(MSBuildProjectDirectory)/PublicAPI.Unshipped.txt')" />
+  </ItemGroup>
+
 </Project>

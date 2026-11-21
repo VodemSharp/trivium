@@ -11,8 +11,8 @@ last_reviewed: 2026-11-21
 [Deduplication](reference/deduplication.md) · [Quality gates](fundamental/quality.md) ·
 [Telegram coverage](reference/telegram-coverage.md) · [Diagnostics](reference/diagnostics.md)
 
-> **Status:** M0 (foundation) in progress. There is no public package; the first and only release is 1.0, published
-> after every milestone in the [roadmap](plan/roadmap.md) is complete.
+> **Status:** M0 (foundation) complete; M1 (kernel) in progress. There is no public package; the first and only release
+> is 1.0, published after every milestone in the [roadmap](plan/roadmap.md) is complete.
 
 > **Internal document.** This page, `fundamental/` and `plan/` are contributor and agent documentation. The VitePress
 > site publishes only the public landing page and, as features ship, `guide/` and `reference/` pages.
