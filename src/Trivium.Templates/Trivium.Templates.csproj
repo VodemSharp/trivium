@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Trivium.Templates</RootNamespace>
+    <PackageId>Trivium.Templates</PackageId>
+    <Description>Start a Trivium bot with dotnet new trivium-bot.</Description>
+    <IsPackable>true</IsPackable>
+    <PackageType>Template</PackageType>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="content/**/*.cs" />
+    <Content Include="content/**/*" Exclude="content/**/bin/**;content/**/obj/**" PackagePath="content/%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Trivium.AspNetCore</RootNamespace>
+    <PackageId>Trivium.AspNetCore</PackageId>
+    <Description>Secure ASP.NET Core webhook hosting for Trivium bots: secret validation and request limits.</Description>
+    <IsPackable>true</IsPackable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Trivium.Hosting/Trivium.Hosting.csproj" />
+  </ItemGroup>
+
+</Project>

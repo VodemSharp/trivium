@@ -1,0 +1,39 @@
+<Project>
+
+  <!-- In-house Roslyn analyzers and the source generator are applied to every
+       project. The compiler-extension projects themselves, their tests and the
+       Aspire AppHost are excluded. -->
+  <ItemGroup Condition="'$(MSBuildProjectName)' != 'Trivium.Analyzers' and '$(MSBuildProjectName)' != 'Trivium.Analyzers.CodeFixes' and '$(MSBuildProjectName)' != 'Trivium.Analyzers.Tests' and '$(MSBuildProjectName)' != 'Trivium.Generators' and '$(MSBuildProjectName)' != 'Trivium.AppHost'">
+    <ProjectReference Include="$(MSBuildThisFileDirectory)src/analyzers/Trivium.Analyzers/Trivium.Analyzers.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)src/analyzers/Trivium.Analyzers.CodeFixes/Trivium.Analyzers.CodeFixes.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)src/Trivium.Generators/Trivium.Generators.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+    <Authors>Trivium contributors</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/VodemSharp/Trivium</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>telegram;bot;framework;routing;dotnet</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Description Condition="'$(Description)' == ''">A framework for Telegram bots: source-generated routing and dispatch, polling and webhooks, multi-bot hosting and update deduplication.</Description>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+</Project>

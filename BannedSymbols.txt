@@ -1,0 +1,23 @@
+P:System.DateTime.Now;Use an injected TimeProvider instead of DateTime.Now.
+P:System.DateTime.Today;Use an injected TimeProvider instead of DateTime.Today.
+P:System.DateTime.UtcNow;Use an injected TimeProvider instead of DateTime.UtcNow.
+P:System.DateTimeOffset.Now;Use an injected TimeProvider instead of DateTimeOffset.Now.
+P:System.DateTimeOffset.UtcNow;Use an injected TimeProvider instead of DateTimeOffset.UtcNow.
+M:System.Net.Http.HttpClient.#ctor;Resolve HttpClient from IHttpClientFactory instead of newing it up.
+M:System.Runtime.CompilerServices.TaskAwaiter.GetResult;Do not block on async work; use await.
+M:System.Threading.Tasks.Task.Wait;Do not block on async work; use await.
+M:System.Threading.Tasks.Task.Wait(System.Int32);Do not block on async work; use await.
+M:System.Threading.Tasks.Task.Wait(System.Int32,System.Threading.CancellationToken);Do not block on async work; use await.
+M:System.Threading.Tasks.Task.Wait(System.Threading.CancellationToken);Do not block on async work; use await.
+M:System.Threading.Tasks.Task.Wait(System.TimeSpan);Do not block on async work; use await.
+M:System.Threading.Tasks.Task.WaitAll(System.Threading.Tasks.Task[]);Do not block on async work; use Task.WhenAll.
+M:System.Threading.Tasks.Task.WaitAny(System.Threading.Tasks.Task[]);Do not block on async work; use Task.WhenAny.
+P:System.Threading.Tasks.Task`1.Result;Do not block on async work; use await.
+P:System.Threading.Tasks.ValueTask`1.Result;Do not block on async work; use await.
+M:System.Threading.Thread.Sleep(System.Int32);Use await Task.Delay instead of Thread.Sleep.
+M:System.Threading.Thread.Sleep(System.TimeSpan);Use await Task.Delay instead of Thread.Sleep.
+M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[]);Do not invoke methods through reflection; call the generated invoker.
+M:System.Reflection.MethodInfo.MakeGenericMethod(System.Type[]);Avoid runtime generic construction; keep the code AOT-safe.
+M:System.Delegate.DynamicInvoke(System.Object[]);Do not invoke delegates dynamically; use a strongly typed delegate.
+M:System.Activator.CreateInstance(System.Type);Avoid runtime activation; register a factory or resolve from DI.
+T:Newtonsoft.Json.JsonConvert;Use System.Text.Json source generation.

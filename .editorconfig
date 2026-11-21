@@ -1,0 +1,362 @@
+# top-most EditorConfig file
+root = true
+
+# Default settings:
+# A newline ending every file
+# Use 4 spaces as indentation
+[*]
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+# Specify UTF-8 without byte-order mark
+[*.{csproj,locproj,nativeproj,proj,resx,slnx,vbproj}]
+charset = utf-8
+
+# C# files
+[*.cs]
+# New line preferences
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+csharp_wrap_object_and_collection_initializer_style = chop_always
+csharp_place_simple_initializer_on_single_line = false
+csharp_max_initializer_elements_on_line = 1
+
+# Indentation preferences
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents = true
+csharp_indent_case_contents_when_block = false
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
+
+# Modifier preferences
+csharp_preferred_modifier_order = public, private, protected, internal, file, static, extern, new, virtual, abstract, sealed, override, readonly, unsafe, required, volatile, async:warning
+
+# avoid this. unless absolutely necessary
+dotnet_style_qualification_for_field = false:warning
+dotnet_style_qualification_for_property = false:warning
+dotnet_style_qualification_for_method = false:warning
+dotnet_style_qualification_for_event = false:warning
+
+# Types: prefer `var` instead of explicit types
+csharp_style_var_for_built_in_types = true:warning
+csharp_style_var_when_type_is_apparent = true:warning
+csharp_style_var_elsewhere = true:warning
+dotnet_style_predefined_type_for_locals_parameters_members = true:warning
+dotnet_style_predefined_type_for_member_access = true:warning
+
+# name all constant fields using PascalCase
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = warning
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case_style
+dotnet_naming_symbols.constant_fields.applicable_kinds = field
+dotnet_naming_symbols.constant_fields.required_modifiers = const
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+# internal and private fields should be _camelCase
+dotnet_naming_rule.camel_case_for_private_internal_fields.severity = warning
+dotnet_naming_rule.camel_case_for_private_internal_fields.symbols = private_internal_fields
+dotnet_naming_rule.camel_case_for_private_internal_fields.style = camel_case_underscore_style
+dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
+dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, internal
+dotnet_naming_style.camel_case_underscore_style.required_prefix = _
+dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
+
+# enforce async suffix for async methods
+dotnet_naming_rule.async_methods_end_in_async.severity = warning
+dotnet_naming_rule.async_methods_end_in_async.symbols = async_methods
+dotnet_naming_rule.async_methods_end_in_async.style = end_in_async
+dotnet_naming_symbols.async_methods.applicable_kinds = method
+dotnet_naming_symbols.async_methods.required_modifiers = async
+dotnet_naming_style.end_in_async.required_suffix = Async
+dotnet_naming_style.end_in_async.capitalization = pascal_case
+
+# Code style defaults
+csharp_using_directive_placement = outside_namespace:warning
+dotnet_sort_system_directives_first = true
+csharp_prefer_braces = true:warning
+csharp_preserve_single_line_blocks = true:none
+csharp_preserve_single_line_statements = false
+csharp_prefer_static_local_function = true:warning
+csharp_prefer_simple_using_statement = false:none
+csharp_style_prefer_switch_expression = true:warning
+dotnet_style_readonly_field = true:warning
+
+# Expression-level preferences
+dotnet_style_object_initializer = true:warning
+dotnet_style_collection_initializer = true:warning
+dotnet_style_prefer_collection_expression = when_types_exactly_match
+dotnet_style_explicit_tuple_names = true:warning
+dotnet_style_coalesce_expression = true:warning
+dotnet_style_null_propagation = true
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+dotnet_style_prefer_inferred_tuple_names = true:warning
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:warning
+dotnet_style_prefer_auto_properties = true:warning
+dotnet_style_prefer_conditional_expression_over_assignment = true:none
+dotnet_style_prefer_conditional_expression_over_return = true:none
+csharp_prefer_simple_default_expression = true:warning
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = false:none
+csharp_style_expression_bodied_constructors = false:none
+csharp_style_expression_bodied_operators = true:none
+csharp_style_expression_bodied_properties = true:none
+csharp_style_expression_bodied_indexers = true:none
+csharp_style_expression_bodied_accessors = true:none
+csharp_style_expression_bodied_lambdas = false:none
+csharp_style_expression_bodied_local_functions = false:none
+
+# Pattern matching
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+csharp_style_inlined_variable_declaration = true:warning
+
+# Null checking preferences
+csharp_style_throw_expression = true:warning
+csharp_style_conditional_delegate_call = true:warning
+
+# Other features
+csharp_style_prefer_index_operator = false:none
+csharp_style_prefer_range_operator = false:none
+csharp_style_pattern_local_over_anonymous_function = false:none
+
+# Space preferences
+csharp_space_after_cast = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_comma = true
+csharp_space_after_dot = false
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_around_declaration_statements = false
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_before_comma = false
+csharp_space_before_dot = false
+csharp_space_before_open_square_brackets = false
+csharp_space_before_semicolon_in_for_statement = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_parentheses = false
+csharp_space_between_square_brackets = false
+
+# Xml project files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,nativeproj,locproj}]
+indent_size = 2
+
+# Xml build files
+[*.builds]
+indent_size = 2
+
+# Xml files
+[*.{resx,ruleset,slnx,stylecop,xml}]
+indent_size = 2
+
+# Xml resource files
+[*.resx]
+# match Visual Studio behavior
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Xml config files
+[*.{props,targets,config,nuspec}]
+indent_size = 2
+
+# Data serialization
+[*.{json,yaml,yml}]
+indent_size = 2
+
+# Markdown is formatted by Prettier (see package.json / .prettierrc.json)
+[*.md]
+indent_size = 2
+max_line_length = 120
+
+# Razor components / Blazor markup. The embedded C# lives in `.razor.cs`
+# code-behind (a normal C# file, so `dotnet format` + RCS0056 cover it); this
+# section lets IDEs wrap long markup lines too.
+[*.{razor,cshtml}]
+max_line_length = 120
+
+# Shell scripts
+[*.sh]
+end_of_line = lf
+
+[*.{cmd,bat}]
+end_of_line = crlf
+
+##############################################################################
+# Diagnostic severities
+#
+# Binary model — every rule is either off or enforced; there is no
+# non-blocking middle tier:
+#
+#   none        rule disabled
+#   warning     fails the build (TreatWarningsAsErrors=true)
+#
+# Every rule is `none` unless explicitly promoted to `warning`. To promote a
+# rule, add it to the "<family> — promoted" list, set `= warning`, and fix all
+# findings in the same change. See docs/fundamental/quality.md.
+##############################################################################
+[*.cs]
+
+# --- .NET analyzers (CA*) ----------------------------------------------------
+# AnalysisMode=Recommended (Directory.Build.props) enables the recommended set,
+# which reports at warning and therefore fails the build. Per-rule tweaks and
+# exemptions live below.
+
+# promoted (build-failing)
+dotnet_diagnostic.CA1848.severity = warning   # use LoggerMessage delegates
+dotnet_diagnostic.CA2016.severity = warning   # forward the CancellationToken
+dotnet_diagnostic.CA2213.severity = warning   # dispose disposable fields
+
+# exemption: base-name matching pushes `cancellationToken`; the repo names every token `ct`.
+dotnet_diagnostic.CA1725.severity = none
+
+# --- ASP.NET Core analyzers (ASP*) -------------------------------------------
+# From Microsoft.AspNetCore.App.Analyzers, shipped with the ASP.NET Core targeting
+# pack and therefore active in the web projects only.
+
+# promoted (build-failing)
+dotnet_diagnostic.ASP0015.severity = warning   # use the IHeaderDictionary property instead of a header-name literal
+
+# --- Trivium analyzer rules (TRIVSTYLE*) -------------------------------------
+# In-house rules implemented in src/analyzers/Trivium.Analyzers and applied to
+# every project through Directory.Build.targets.
+dotnet_diagnostic.TRIVSTYLE0001.severity = warning   # name CancellationToken parameters/locals 'ct'
+dotnet_diagnostic.TRIVSTYLE0002.severity = warning   # assign awaited calls to a local instead of inlining them
+dotnet_diagnostic.TRIVSTYLE0003.severity = warning   # put an object initializer on its own line
+dotnet_diagnostic.TRIVSTYLE0004.severity = warning   # add a blank line after a multi-line statement
+dotnet_diagnostic.TRIVSTYLE0005.severity = warning   # assign awaited calls in conditions to a local instead of inlining them
+
+# --- IDE (code style) --------------------------------------------------------
+# Configured by the dotnet_style_* / csharp_style_* options above, which are
+# either `:warning` (enforced) or `:none` (unchecked). The rules below are the
+# ones enforced independently of an option severity.
+dotnet_diagnostic.IDE0005.severity = warning
+dotnet_diagnostic.IDE0051.severity = warning
+dotnet_diagnostic.IDE0052.severity = warning
+dotnet_diagnostic.IDE0060.severity = warning
+dotnet_diagnostic.IDE0079.severity = warning
+dotnet_diagnostic.IDE0130.severity = warning
+dotnet_diagnostic.IDE0161.severity = warning
+dotnet_diagnostic.IDE0300.severity = warning
+dotnet_diagnostic.IDE0301.severity = warning
+dotnet_diagnostic.IDE0302.severity = warning
+dotnet_diagnostic.IDE0303.severity = warning
+dotnet_diagnostic.IDE0304.severity = warning
+
+# exemption: the repo prefers explicit terminal LINQ operators (.ToList()) over
+# spread collection expressions for fluent results.
+dotnet_diagnostic.IDE0305.severity = none
+
+# --- ReSharper (jb inspectcode) ----------------------------------------------
+# Roslyn's IDE0005 is conservative: it does not flag a using that is only reached
+# through an extension method. `jb inspectcode` (pinned in .config/dotnet-tools.json)
+# runs in verify-backend and fails on any RedundantUsingDirective finding.
+resharper_redundant_using_directive_highlighting = warning
+
+# --- Roslynator (RCS*) -------------------------------------------------------
+# Deny-by-default: the category switches below turn every Roslynator rule off, so a
+# rule is active only when explicitly promoted to `warning`. Declined rules and their
+# rationale live in docs/fundamental/code-quality.md ("Current exemptions").
+dotnet_analyzer_diagnostic.category-Roslynator.severity = none
+# The RCS0xxx formatting group is off (it restates `dotnet format` + the hand-crafted
+# preferences above, and RCS0044 would force CRLF); RCS0056 is the one exception.
+dotnet_analyzer_diagnostic.category-Roslynator.Formatting.severity = none
+
+# Maximum line length enforced by RCS0056 (see AGENTS.md "Formatting & Configuration").
+roslynator_max_line_length = 120
+roslynator_tab_length = 4
+
+# promoted (build-failing)
+dotnet_diagnostic.RCS0056.severity = warning   # a line is too long (> 120 chars)
+dotnet_diagnostic.RCS1069.severity = warning   # remove unnecessary case label
+dotnet_diagnostic.RCS1070.severity = warning   # remove redundant default switch section
+dotnet_diagnostic.RCS1077.severity = warning   # optimize LINQ method call
+dotnet_diagnostic.RCS1097.severity = warning   # remove redundant 'ToString' call
+dotnet_diagnostic.RCS1102.severity = warning   # make class static
+dotnet_diagnostic.RCS1111.severity = warning   # add braces to switch section with multiple statements
+dotnet_diagnostic.RCS1118.severity = warning   # mark local variable as const
+dotnet_diagnostic.RCS1135.severity = warning   # declare enum member with zero value
+dotnet_diagnostic.RCS1155.severity = warning   # use StringComparison when comparing strings
+dotnet_diagnostic.RCS1169.severity = warning   # make field read-only
+dotnet_diagnostic.RCS1170.severity = warning   # use read-only auto-implemented property
+dotnet_diagnostic.RCS1189.severity = warning   # add region name to #endregion
+dotnet_diagnostic.RCS1197.severity = warning   # optimize StringBuilder.Append/AppendLine call
+dotnet_diagnostic.RCS1213.severity = warning   # remove unused member declaration
+dotnet_diagnostic.RCS1222.severity = warning   # merge preprocessor directives
+dotnet_diagnostic.RCS1238.severity = warning   # avoid nested conditional operators
+
+# --- AsyncFixer (AsyncFixer*) ------------------------------------------------
+# Only the rules unique to AsyncFixer are promoted; 02/03 duplicate VSTHRD103/VSTHRD100
+# and the banned APIs, so they are disabled to avoid duplicate diagnostics.
+dotnet_diagnostic.AsyncFixer02.severity = none   # blocking calls in async (covered by VSTHRD103 + RS0030)
+dotnet_diagnostic.AsyncFixer03.severity = none   # async void (covered by VSTHRD100)
+
+# promoted (build-failing)
+dotnet_diagnostic.AsyncFixer01.severity = warning   # unnecessary async/await
+dotnet_diagnostic.AsyncFixer04.severity = warning   # unawaited async call in a using block
+dotnet_diagnostic.AsyncFixer05.severity = warning   # nested Task from TaskFactory.StartNew
+dotnet_diagnostic.AsyncFixer06.severity = warning   # Task<T> to Task conversion drops the result
+
+# --- Microsoft.VisualStudio.Threading (VSTHRD*) ------------------------------
+# Every rule is disabled unless explicitly promoted below.
+dotnet_diagnostic.VSTHRD001.severity = none
+dotnet_diagnostic.VSTHRD002.severity = none
+dotnet_diagnostic.VSTHRD003.severity = none
+dotnet_diagnostic.VSTHRD004.severity = none
+dotnet_diagnostic.VSTHRD010.severity = none
+dotnet_diagnostic.VSTHRD011.severity = none
+dotnet_diagnostic.VSTHRD012.severity = none
+dotnet_diagnostic.VSTHRD101.severity = none
+dotnet_diagnostic.VSTHRD102.severity = none
+dotnet_diagnostic.VSTHRD104.severity = none
+dotnet_diagnostic.VSTHRD105.severity = none
+dotnet_diagnostic.VSTHRD106.severity = none
+dotnet_diagnostic.VSTHRD108.severity = none
+dotnet_diagnostic.VSTHRD109.severity = none
+dotnet_diagnostic.VSTHRD111.severity = none
+dotnet_diagnostic.VSTHRD112.severity = none
+dotnet_diagnostic.VSTHRD113.severity = none
+dotnet_diagnostic.VSTHRD115.severity = none
+dotnet_diagnostic.VSTHRD201.severity = none
+
+# exemption: the repo's own naming rule requires the Async suffix (IDE1006 / naming rules).
+dotnet_diagnostic.VSTHRD200.severity = none
+
+# promoted (build-failing)
+dotnet_diagnostic.VSTHRD100.severity = warning   # avoid async void methods
+dotnet_diagnostic.VSTHRD103.severity = warning   # call async methods when in an async method
+dotnet_diagnostic.VSTHRD107.severity = warning   # await the task in a using expression
+dotnet_diagnostic.VSTHRD110.severity = warning   # observe the result of async calls
+dotnet_diagnostic.VSTHRD114.severity = warning   # do not return a null Task
+
+# --- Banned APIs (RS0030/RS0031) ---------------------------------------------
+# The list lives in BannedSymbols.txt (referenced as AdditionalFiles in Directory.Build.props).
+dotnet_diagnostic.RS0030.severity = warning
+dotnet_diagnostic.RS0031.severity = warning
+
+# --- Path-scoped exemptions --------------------------------------------------
+# Test names follow the xUnit Given_When_Then convention, which deliberately
+# uses underscores.
+[tests/**/*.cs]
+dotnet_diagnostic.CA1707.severity = none
+# Test methods follow the Given_When_Then convention, so they do not take the Async suffix.
+dotnet_naming_rule.async_methods_end_in_async.severity = none
+
+[tests/**/*.cs]
+# Tests may use reflection to assert against Telegram.Bot's enum surface and may
+# construct fake clients directly.
+dotnet_diagnostic.RS0030.severity = none

@@ -1,0 +1,21 @@
+{
+  "name": "trivium",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.4.2",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:check": "bun run scripts/docs/check-links.ts --strict",
+    "docs:freshness": "bun run scripts/docs/freshness.ts",
+    "docs:test": "bun test scripts/docs",
+    "format:md": "prettier --write \"**/*.md\"",
+    "format:md:check": "prettier --check \"**/*.md\""
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.2",
+    "prettier": "3.9.9",
+    "vitepress": "1.6.4"
+  }
+}

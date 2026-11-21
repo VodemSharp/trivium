@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Trivium.Generators</id>
+    <version>$version$</version>
+    <authors>Trivium contributors</authors>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/VodemSharp/Trivium</projectUrl>
+    <repository type="git" url="https://github.com/VodemSharp/Trivium" />
+    <description>Compile-time routes, invokers, DI registration and callback-data codecs for Trivium bots.</description>
+    <readme>README.md</readme>
+    <icon>icon.png</icon>
+    <tags>telegram;bot;framework;source-generator;analyzers</tags>
+  </metadata>
+  <files>
+    <file src="bin/$configuration$/netstandard2.0/Trivium.Generators.dll" target="analyzers/dotnet/cs" />
+    <file src="bin/$configuration$/netstandard2.0/Trivium.Generators.pdb" target="analyzers/dotnet/cs" />
+    <file src="../../README.md" target="" />
+    <file src="../../icon.png" target="" />
+  </files>
+</package>

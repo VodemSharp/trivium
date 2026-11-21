@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore Trivium.slnx
+
+      - name: Verify formatting
+        run: dotnet format Trivium.slnx --no-restore --verify-no-changes
+
+      - name: Build
+        run: dotnet build Trivium.slnx --no-restore --configuration Release
+
+      - name: Restore tools
+        run: dotnet tool restore
+
+      - name: Verify ReSharper inspections
+        run: |
+          dotnet jb inspectcode Trivium.slnx -o=inspect.xml -f=xml --no-build --no-swea -e=HINT --properties:Configuration=Release --properties:RunAnalyzers=false
+          if grep -q '<Issue ' inspect.xml; then
+            echo "ReSharper inspections failed:"
+            grep -o '<Issue [^>]*>' inspect.xml
+            exit 1
+          fi
+
+      - name: Test
+        run: dotnet test Trivium.slnx --no-build --configuration Release
+
+      - name: Pack
+        run: dotnet pack Trivium.slnx --no-build --configuration Release --output artifacts
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: artifacts/
+          if-no-files-found: error

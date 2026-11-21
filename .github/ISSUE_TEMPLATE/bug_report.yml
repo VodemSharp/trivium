@@ -1,0 +1,30 @@
+name: Bug report
+description: Report a defect in Trivium.
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Include the expected behavior and the actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: A repository, gist or code snippet. Do not include bot tokens.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Trivium version
+    validations:
+      required: true
+  - type: input
+    id: telegram-version
+    attributes:
+      label: Telegram.Bot version
+    validations:
+      required: true

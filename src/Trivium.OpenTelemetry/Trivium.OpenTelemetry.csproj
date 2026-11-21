@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>Trivium.OpenTelemetry</RootNamespace>
+    <PackageId>Trivium.OpenTelemetry</PackageId>
+    <Description>OpenTelemetry traces, metrics and logs for Trivium bots.</Description>
+    <IsPackable>true</IsPackable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Trivium/Trivium.csproj" />
+  </ItemGroup>
+
+</Project>

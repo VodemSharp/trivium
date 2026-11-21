@@ -1,0 +1,69 @@
+name: Docs
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - 'docs/**'
+      - 'scripts/docs/**'
+      - 'scripts/tsconfig.json'
+      - 'package.json'
+      - 'bun.lock'
+      - '.prettierrc.json'
+      - '.prettierignore'
+      - '.github/workflows/docs.yml'
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - 'docs/**'
+      - 'scripts/docs/**'
+      - 'scripts/tsconfig.json'
+      - 'package.json'
+      - 'bun.lock'
+  schedule:
+    # Guides go stale when code changes, and code-only PRs never trigger this workflow.
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # The freshness report dates each guide against its last code change.
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Verify markdown formatting
+        run: bun run format:md:check
+
+      - name: Test the docs tooling
+        run: bun run docs:test
+
+      - name: Verify internal links and anchors
+        run: bun run docs:check
+
+      - name: Report documentation freshness
+        run: bun run docs:freshness
+
+      - name: Build docs
+        run: bun run docs:build
