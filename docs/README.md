@@ -17,6 +17,10 @@ last_reviewed: 2026-11-21
 > **Internal document.** This page, `fundamental/` and `plan/` are contributor and agent documentation. The VitePress
 > site publishes only the public landing page and, as features ship, `guide/` and `reference/` pages.
 
+The published site is a GitHub Pages project page at <https://vodemsharp.github.io/trivium/>, built from `docs/` with
+`base: "/trivium/"` and deployed by `.github/workflows/deploy-docs.yml` on a push to `main` that touches the docs build
+inputs. The `Docs` workflow stays the PR gate; the deploy workflow only runs on `main` and `workflow_dispatch`.
+
 ## Where to start
 
 | If you are…                            | Read                                                                                    |
